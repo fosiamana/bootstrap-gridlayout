@@ -4,13 +4,25 @@ $username= "root";
 $password="";
 $database="zalego";
 $conn=mysqli_connect( $server,$username,$password,$database);
-if($conn)
+if(isset($_POST["submitButton"]))
 {
-    echo "database connected successfully";
-}
-else{
-    echo "error occured";
-}
+    // 1.fetch form data
+     $firstName=$_POST['firstname'];
+     $lastName=$_POST['lastname'];
+     $email=$_POST['email'];
+     $phone= $_POST['phonenumber'];
+     $message=$_POST['message'];
+    // 2. submit form  data
+    $insertData=mysqli_query( $conn, "INSERT INTO contactus(firstname,lastname,email, phonenumber,message) VALUES('$firstName','$lastName','$email','$phone','$message')" );
+    if($insertData)
+    {
+        echo "data submited successfully";
+    }
+        else{ 
+            echo "error occured";
+        }
+    }
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +37,7 @@ else{
 </head>
 <body>
      <!-- navigation bar here -->
-     <nav class="navbar navbar-expand-lg bg-light shadow fixed-top" >
+     <!-- <nav class="navbar navbar-expand-lg bg-light shadow fixed-top" >
         <div class="container-fluid">
             <a href="#" class="navbar-brand">Zalego Academy</a>
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDisplayNavigations" aria-expanded="false">
@@ -40,7 +52,7 @@ else{
                 </div>
         
         </div>  
-    </nav>
+    </nav> -->
      <!-- end navigation bar -->
 
 
@@ -79,36 +91,36 @@ else{
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit voluptatibus sint quae esse aperiam, blanditiis debitis unde mollitia rem, ipsam eos pariatur quas natus dicta recusandae tempore vitae temporibus culpa necessitatibus nulla consequuntur. Sapiente, culpa quidem? Fugit molestias et earum?
             </p>
-          <form action="index.html" method="POST">
+          <form action="index.php" method="POST">
              <div class="row">
                 <div class="mb-3 col-lg-6">
                     <label for="firstName" class="form-label">First name</label>
-                    <input type="text" class="form-control" placeholder="Enter first name">
+                    <input type="text"  name= "firstname"class="form-control" placeholder="Enter first name">
                   </div>
                   <div class="mb-3 col-lg-6" >
                       <label for="lastName" class="form-label">Last name</label>
-                      <input type="text" class="form-control" placeholder="Enter last name">
+                      <input type="text"  name= "lastname"class="form-control" placeholder="Enter last name">
                     </div>
              </div>
              <div class="row">
                 <div class="mb-3 col-lg-6">
                     <label for="email" class="form-label">email</label>
-                    <input type="text" class="form-control" placeholder="Enter email">
+                    <input type="text" name= "email" class="form-control" placeholder="Enter email">
                   </div>
                   <div class="mb-3 col-lg-6" >
                       <label for="phone" class="form-label">phone number</label>
-                      <input type="tel" class="form-control" placeholder="Enter your no.">
+                      <input type="tel" name= "phonenumber" class="form-control" placeholder="Enter your no.">
                     </div>
              </div>
              <div class="row">
                  <div class="col-lg-12">
                     <label for="message" class="form-label">Your message</label>
-                    <textarea cols="30" rows="10" class="form-control"></textarea>
+                    <textarea cols="30"  name= "message" rows="10" class="form-control"></textarea>
                  </div>
 
              </div>
              <br>
-             <button class="btn btn-primary" type="submit">send a message</button>
+             <button class="btn btn-primary" type="submit" name="submitButton">submit </button>
           </form>
           
         </div>

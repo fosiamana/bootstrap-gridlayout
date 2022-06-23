@@ -1,29 +1,6 @@
-<?php
-$server="localhost";
-$username= "root";
-$password="";
-$database="zalego";
-$conn=mysqli_connect( $server,$username,$password,$database);
-if(isset($_POST["submitButton"]))
-{
-    // 1.fetch form data
-     $firstName=$_POST['firstname'];
-     $lastName=$_POST['lastname'];
-     $email=$_POST['email'];
-     $phone= $_POST['phonenumber'];
-     $message=$_POST['message'];
-    // 2. submit form  data
-    $insertData=mysqli_query( $conn, "INSERT INTO contactus(firstname,lastname,email, phonenumber,message) VALUES('$firstName','$lastName','$email','$phone','$message')" );
-    if($insertData)
-    {
-        echo "data submited successfully";
-    }
-        else{ 
-            echo "error occured";
-        }
-    }
+<?php include('process.php') ?>
  
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +14,7 @@ if(isset($_POST["submitButton"]))
 </head>
 <body>
      <!-- navigation bar here -->
-     <!-- <nav class="navbar navbar-expand-lg bg-light shadow fixed-top" >
+     <nav class="navbar navbar-expand-lg bg-light shadow fixed-top" >
         <div class="container-fluid">
             <a href="#" class="navbar-brand">Zalego Academy</a>
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDisplayNavigations" aria-expanded="false">
@@ -52,7 +29,7 @@ if(isset($_POST["submitButton"]))
                 </div>
         
         </div>  
-    </nav> -->
+    </nav> 
      <!-- end navigation bar -->
 
 
@@ -92,6 +69,14 @@ if(isset($_POST["submitButton"]))
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit voluptatibus sint quae esse aperiam, blanditiis debitis unde mollitia rem, ipsam eos pariatur quas natus dicta recusandae tempore vitae temporibus culpa necessitatibus nulla consequuntur. Sapiente, culpa quidem? Fugit molestias et earum?
             </p>
           <form action="index.php" method="POST">
+           
+              <?php 
+              if($response)
+              {
+                include( 'response.php');
+              }
+              ?>
+           
              <div class="row">
                 <div class="mb-3 col-lg-6">
                     <label for="firstName" class="form-label">First name</label>
